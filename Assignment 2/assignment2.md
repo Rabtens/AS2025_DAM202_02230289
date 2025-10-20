@@ -84,6 +84,8 @@ Key findings from the analysis:
 -  Dataset quality and feature selection strongly affected prediction performance
 -  Limitations exist when using daily data for 6–12-hour forecasts, but models still showed consistent short-term trends
 
+![alt text](<Screenshot from 2025-10-20 09-14-28.png>)
+
 ## Recommendations
 
 To further improve performance:
