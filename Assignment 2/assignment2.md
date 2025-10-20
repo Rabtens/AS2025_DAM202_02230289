@@ -117,4 +117,4 @@ Assignment2_DAM202.ipynb
 
 ---
 
-**Project Type:** Machine Learning Classification | **Course:** DAM202 | **Assignment:** II
+**Project Type:** Machine Learning Classification | **Course:** DAM202 | **Assignment:** 2
