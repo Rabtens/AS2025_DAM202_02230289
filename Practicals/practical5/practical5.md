@@ -110,6 +110,89 @@ This practical helped in understanding how Neural Machine Translation works usin
  ![alt text](<Screenshot from 2025-10-22 12-22-50.png>)
 ---
 
+# Architecture for Long Attention Neural Machine Translation (French to English)
+
+## 1. Input Processing (French Source Sentence)
+
+### Tokenization
+- The French input sentence is broken down into individual words or sub-word units (tokens)
+
+### Embedding
+- Each token is converted into a continuous vector representation (embedding), capturing semantic meaning
+
+---
+
+## 2. Encoder (Contextual Representation)
+
+- The encoder's role is to read the entire French source sentence and produce a sequence of contextual representations
+- Each representation (or hidden state) summarizes a part of the input, taking into account its surrounding words
+
+### Recurrent Neural Network (RNN) / Transformer Blocks
+- **Historically**: RNNs (like LSTMs or GRUs) were used
+- **Currently**: Transformer models, with their self-attention mechanisms, have become dominant due to their ability to:
+  - Process input in parallel
+  - Capture long-range dependencies more effectively
+- **For "Long Attention"**: Transformers are particularly well-suited
+
+---
+
+## 3. Long Attention Mechanism (Bridging Encoder-Decoder)
+
+- This is the **core innovation**
+- Unlike standard attention that might focus on a limited window or average attention over the whole sequence, "Long Attention" aims to:
+  - Maintain comprehensive contextual information from the entire source sentence
+  - Handle very long sentences effectively
+
+### Key Idea
+
+The mechanism might involve techniques like:
+
+#### Multi-head Attention
+- Allows the model to jointly attend to information from different representation subspaces at different positions
+- This is standard in Transformers
+
+#### Sparse Attention / Localized Attention
+- Instead of attending to all input tokens at every step, sparse attention mechanisms focus on a smaller, more relevant subset of tokens
+- This can include:
+  - **Fixed-window attention**: Only attends to `k` previous tokens
+  - **Dilated attention**: Allows for an exponentially increasing receptive field by skipping tokens, effectively covering a long range with fewer computations
+  - **Global-Local Attention**: Combines attention to a few global summary tokens with local attention to nearby tokens
+
+#### Memory Networks / External Memory
+- Storing and retrieving more extensive contextual information that might not fit directly into a single hidden state
+
+#### Hierarchical Attention
+- Attending to different levels of granularity (e.g., words, phrases, sentences)
+
+---
+
+## 4. Decoder (English Target Sentence Generation)
+
+- The decoder generates the English target sentence word by word
+
+### Recurrent Neural Network (RNN) / Transformer Blocks
+- Similar to the encoder, it can use RNNs or Transformer blocks
+
+### Attention Application
+- At each step of generating an English word, the decoder:
+  - Uses the "Long Attention" mechanism to query the encoded French representations
+  - Determines which parts of the source sentence are most relevant for generating the current target word
+  - Uses the attention output to update the decoder's state
+
+### Softmax Layer
+- After processing through the decoder and attention:
+  - Outputs a probability distribution over the entire English vocabulary
+  - Indicates the most likely next word
+
+---
+[text](architecture.pdf)
+![alt text](<Screenshot from 2025-10-22 13-11-01.png>)
+---
+
+## Summary
+
+This architecture leverages **Long Attention mechanisms** to improve translation quality, especially for long and complex sentences, by maintaining better context awareness throughout the translation process.
+
 ## 12. References
 
 - TensorFlow Documentation: https://www.tensorflow.org
